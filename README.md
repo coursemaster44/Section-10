@@ -1,5 +1,4 @@
 # Section-10
-# Section 10
 
 # 1.crud-app-on-single-ec2-lab
 
