@@ -74,7 +74,7 @@ $ npm start
 - IAM Instance profile - EC2S3FullAccess
 
 **Step 3. Click on Advance details>user data>As text**
-Type the following commands-
+- Type the following commands-
 ```sh
 #!/bin/bash
 $ yum update -y
@@ -98,10 +98,11 @@ $ $INSTANCE_ID --lifecycle-hook-name test-hook --auto-scaling-group-name test-as
 **Step 4. Select Security Group and key pair**
 
 **Step 5. Click Create Launch Configurations**
-Successfully created launch configuration test-lc
+- Successfully created launch configuration test-lc
 
-**Step 6. Select lc-cd-crud >Actions>Create Auto Scaling group
+**Step 6. Select lc-cd-crud >Actions>Create Auto Scaling group**
 - Give Auto Scaling group name - test-asg
+
 Click on Next
 
 **Step 7.Select Vpc and select all subnets**
