@@ -1,6 +1,92 @@
 # Section-10
 
-# 1.crud-app-on-single-ec2-lab
+# 1-postman-environment-config-lab
+
+**Step 1.Open Postman Tool**
+- Click on Top Right corner Manage Environments
+- In Add Environment - Name as "dev"
+  - Variable - url
+  - Initial Value - http://localhost:3000
+  - Click on ADD and close this window
+
+**Step 2.Open Postman Tool**
+- Click on Top Right corner Manage Environments
+- In Add Environment - Name as "ec2"
+  - Variable - url
+  - Initial Value - http://13.126.211.32:3000
+  - Click on ADD and close this window
+**Step 3.Click on EC2**
+- Provide environment value as - {{url}}
+
+**Step 4.Now select {{url}}/create table and Click on Send**
+
+**Step 5.Check the Table created in DynamoDB**
+- Goto AWS Console>DynamoDB>Tables
+  - Table is created
+
+**Step 6.Goto Postman Tool and put the following value**
+- http://{{url}}/readData
+
+**Step 7.Goto Postman Tool and put the following value**
+- http://{{url}}/insertData
+
+**Step 8.Now Goto AWS Console>DynamoDB>Tables>Items>info**
+- New Item added successfully
+
+**Step 9.Goto Postman Tool and put the following value**
+- http://{{url}}/updateData
+
+**Step 10.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
+- Check for the data updated
+
+**Step 11.Goto Postman Tool and put the following value**
+- http://{{url}}/deleteData
+
+**Step 12.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
+- Check for the data deleted
+
+**Step 13.Goto Postman Tool and put the following value**
+- http://{{url}}/deleteTable
+
+**Step 14.Now Goto AWS Console>DynamoDB>Tables**
+- Refresh and see Table is deleted.
+
+**Step 15.Goto Visual Studio code**
+- Run the following commands
+```sh
+# "start":"./node_modules/.bin/env-cmd -f ./.env.dev pm2 start -f app.js"
+$ npm install
+$ npm start
+$ ./node_modules/.bin/env-cmd -f ./.env.dev node app.js
+# server is up on port 3000
+```
+**Step 16.Open browser and type localhost:3000**
+- Application is running
+
+**Step 17.Goto Postman Tool and change environment to dev**
+- http://{{url}}/updateData
+
+Click on Send
+
+**Step 18.Goto Postman Tool and put the following value**
+- http://{{url}}/deleteData
+
+**Step 19.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
+- Check for the data deleted
+
+**Step 20.Goto Postman Tool and put the following value**
+- http://{{url}}/deleteTable
+
+**Step 21.Now Goto AWS Console>DynamoDB>Tables**
+- Refresh and see Table is deleted.
+
+# End of lab
+
+
+
+
+
+# 3.crud-app-on-single-ec2-lab
 
 **Step 1.Launch an Instance with following settings:**
 - IAM role - Ec2S3FullAccess
@@ -63,7 +149,7 @@ $ npm start
 # End of Lab
 
 
-# 2.crud-app-on-asg-lab
+# 4.crud-app-on-asg-lab
 
 **Step 1. Goto AWS Management Console>Services>Ec2>Ec2Dashboard>Auto Scaling>Launch Configurations**
 
@@ -193,7 +279,7 @@ Click on Update
 
 
 
-# 3.crud-asg-alb-lab
+# 5.crud-asg-alb-lab
 **Step 1.Goto Ec2>Auto Scaling groups>test-asg>Edit**
 - Edit test-asg - 
 - Desired - 3
