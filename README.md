@@ -457,3 +457,108 @@ Click on Update
 
 
 
+# 7.ebs-deployment-1-lab-2
+
+**Step 1.Open Visual Studio Code**
+- Open .env.prod and edit as following
+```sh
+$ DEPLOYMENT_ENV = prod
+$ AWS_REGION = ap-south-1
+$ PORT = 8080
+$ ENDPOINT = http://dynamodb.ap-south-1.amazonaws.com
+```
+**Step 2.Run the following commands**
+```sh
+$ touch Procfile
+# Procfile - web: ./node_modules/.bin/env-cmd -f ./.env.prod node app.js
+$ zip -r Nodejs-curd-app-with-dynamodb.zip . -x "_MACOSX" -x ".DS_Store" -x ".env.dev"
+```
+**Step 3.Goto Elastic Beanstalk>Applications>crud-app>Actions>Delete Application>Confirm>Delete**
+
+**Step 4.Goto AWS Console>Services>Elastic Beanstalk>Create Application**
+- Give Application name - crud-app-1
+- In Platform - 
+  - Platform - nodejs
+  - Platform branch - Node.js 12 running on 64 bit Amazon linux 2
+  - Platform version - 5.2.3(Recommended)
+- In Application code -
+  - Upload code>Local file>choose file>upload
+
+- Click on Configure more options
+  - Presets - Select High availability
+  - Select security>Ec2Keypair>teacheramitkkp
+  - Keep rest as it is
+  
+- Click on Save
+
+Click on create app
+
+**Step 5.Click on crud-app1-env Link**
+- See Application is running
+
+**Step 6.Goto Ec2Dashboard>crud-env>Connect>connect**
+Now Type the following commands -
+```sh
+$ cd /var/app/current
+$ ls -a
+$ cat Procfile
+$ cat eb-engine.log
+$ ls
+```
+**Step 7.Open Postman Tool**
+- Click on Top Right corner Manage Environments
+- In Add Environment - Name as "ebs"
+  - Variable - url
+  - Initial Value - http://crudapp1-env.eba-ysepumd.ap.south-1.elasticbeanstalk,com
+  - Click on ADD and close this window
+
+**Step 8.Open Postman Tool>Environment**
+- Change environment to "ebs"
+
+**Step 9.Now select {{url}}/create table and Click on Send**
+- Error:Not authorized to perform
+
+**Step 10.Goto AWS Console>Services>IAM>Roles>aws-elasticbeanstalk-ec2-role**
+- Click on this role>Permissions>Attach policy
+  - Select AmazonDynamoDBFullAccess
+- Click on Attach Policy
+
+**Step 11.Now Open Postman Tool and select {{url}}/create table and Click on Send**
+- Table created successfully
+
+**Step 12.Check the Table created in DynamoDB**
+- Goto AWS Console>DynamoDB>Tables
+  - Table is created
+
+**Step 13.Goto Postman Tool and put the following value**
+- http://{{url}}/readData
+
+**Step 14.Goto Postman Tool and put the following value**
+- http://{{url}}/insertData
+
+**Step 15.Now Goto AWS Console>DynamoDB>Tables>Items>info**
+- New Item added successfully
+
+**Step 16.Goto Postman Tool and put the following value**
+- http://{{url}}/updateData
+
+**Step 17.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
+- Check for the data updated
+
+**Step 18.Goto Postman Tool and put the following value**
+- http://{{url}}/deleteData
+
+**Step 19.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
+- Check for the data deleted
+
+**Step 20.Goto Postman Tool and put the following value**
+- http://{{url}}/deleteTable
+
+**Step 21.Now Goto AWS Console>DynamoDB>Tables**
+- Refresh and see Table is deleted.
+
+# End of Lab
+
+
+
+
