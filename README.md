@@ -82,7 +82,55 @@ Click on Send
 
 # End of lab
 
+# 2-push-crud-app-on-s3-codecommit-lab
+**Step 1.Goto Visual Studio code**
+- Run the following commands
+```sh
+$ cd crud-app/
+$ git init
+$ touch .gitignore 
+```
+**Step 2.Goto AWS Console>CodeCommit>Repositories>Create Repository**
+In repsitory settings-
+- Repository name - crud-app
 
+Click on Create
+
+**Step 3.Goto AWS Console>CodeCommit>Repositories>crud-app**
+- Click to copy on Clone URL
+
+**Step 4.Go back to Step 1 and type following command**
+```sh
+$ git remote add origin https://git-commit.ap.south-1.amazonaws.com/v1/repos/crud-app**
+$ cat .git/config 
+# see entry in config file
+$ git status
+$ git add .gitignore
+$ git commit -m "first commit"
+$ git push -u origin master
+# AWS Console>CodeCommit>Repositories>crud-app>See the entry for .gitiginore
+$ git add .
+$ git status
+$ git commit -m "pushing all other files and folders"
+$ git push
+$ rm -rf node_modules/
+$ rm -f package-lock.json
+$zip -r Nodejs-curd-app-with-dynamodb.zip . -x "_MACOSX" -x ".DS_Store" -x ".env.dev"
+```
+
+**Step 5.Goto AWS Console>S3>Buckets>Create Bucket**
+- Bucket name - nodejs-curd-app-with-dynamodb-amit
+- Region - Asia Pacific(Mumbai)ap-south-1
+- Keep all other settings default 
+
+Click on Create Bucket
+
+**Step 6.Click on Upload>Add files**
+- Select Nodejs-curd-app-with-dynamodb.zip>Upload
+
+crud-app is on CodeCommit repository
+
+# End of Lab
 
 
 
