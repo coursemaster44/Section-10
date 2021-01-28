@@ -567,27 +567,32 @@ $ ls
 
 **Step 13.Goto Postman Tool and put the following value**
 - http://{{url}}/readData
+- Click on Send
 
 **Step 14.Goto Postman Tool and put the following value**
 - http://{{url}}/insertData
+- Click on Send
 
 **Step 15.Now Goto AWS Console>DynamoDB>Tables>Items>info**
 - New Item added successfully
 
 **Step 16.Goto Postman Tool and put the following value**
 - http://{{url}}/updateData
+- Click on Send
 
 **Step 17.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
 - Check for the data updated
 
 **Step 18.Goto Postman Tool and put the following value**
 - http://{{url}}/deleteData
+- Click on Send
 
 **Step 19.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
 - Check for the data deleted
 
 **Step 20.Goto Postman Tool and put the following value**
 - http://{{url}}/deleteTable
+- Click on Send
 
 **Step 21.Now Goto AWS Console>DynamoDB>Tables**
 - Refresh and see Table is deleted.
