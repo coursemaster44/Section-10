@@ -3,18 +3,21 @@
 # 1-postman-environment-config-lab
 
 **Step 1.Open Postman Tool**
-- Click on Top Right corner Manage Environments
+- Click on Top Right corner Manage Environments>Add
 - In Add Environment - Name as "dev"
   - Variable - url
   - Initial Value - http://localhost:3000
+  - Current Value - http://localhost:3000
   - Click on ADD and close this window
 
 **Step 2.Open Postman Tool**
-- Click on Top Right corner Manage Environments
+- Click on Top Right corner Manage Environments>Add
 - In Add Environment - Name as "ec2"
   - Variable - url
   - Initial Value - http://13.126.211.32:3000
+  - Current Value - http://13.126.211.32:3000
   - Click on ADD and close this window
+
 **Step 3.Click on EC2**
 - Provide environment value as - {{url}}
 
@@ -64,7 +67,8 @@ $ ./node_modules/.bin/env-cmd -f ./.env.dev node app.js
 - Application is running
 
 **Step 17.Goto Postman Tool and change environment to dev**
-- http://{{url}}/updateData
+- Put the following value
+  - http://{{url}}/updateData
 
 Click on Send
 
@@ -74,8 +78,9 @@ Click on Send
 **Step 19.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
 - Check for the data deleted
 
-**Step 20.Goto Postman Tool and put the following value**
-- http://{{url}}/deleteTable
+**Step 20.Goto Postman Tool and change environment to ec2**
+- Put the following value
+  - http://{{url}}/deleteTable
 
 **Step 21.Now Goto AWS Console>DynamoDB>Tables**
 - Refresh and see Table is deleted.
@@ -83,23 +88,25 @@ Click on Send
 # End of lab
 
 # 2-push-crud-app-on-s3-codecommit-lab
+
 **Step 1.Goto Visual Studio code**
 - Run the following commands
 ```sh
 $ cd crud-app/
 $ git init
 $ touch .gitignore 
+# .gitignore files are - .env.dev,node_modules/,.DS_Store
 ```
-**Step 2.Goto AWS Console>CodeCommit>Repositories>Create Repository**
+**Step 2.Goto AWS Console>Developer Tools>CodeCommit>Repositories>Create Repository**
 In repsitory settings-
 - Repository name - crud-app
 
 Click on Create
 
 **Step 3.Goto AWS Console>CodeCommit>Repositories>crud-app**
-- Click to copy on Clone URL
+- Click to copy on Clone URL>Clone HTTPS
 
-**Step 4.Go back to Step 1 and type following command**
+**Step 4.Go back to Step 1 and type following commands**
 ```sh
 $ git remote add origin https://git-commit.ap.south-1.amazonaws.com/v1/repos/crud-app**
 $ cat .git/config 
@@ -108,7 +115,7 @@ $ git status
 $ git add .gitignore
 $ git commit -m "first commit"
 $ git push -u origin master
-# AWS Console>CodeCommit>Repositories>crud-app>See the entry for .gitiginore
+# To Verify above goto AWS Console>CodeCommit>Repositories>crud-app>See the entry for .gitiginore
 $ git add .
 $ git status
 $ git commit -m "pushing all other files and folders"
@@ -125,10 +132,10 @@ $zip -r Nodejs-curd-app-with-dynamodb.zip . -x "_MACOSX" -x ".DS_Store" -x ".env
 
 Click on Create Bucket
 
-**Step 6.Click on Upload>Add files**
-- Select Nodejs-curd-app-with-dynamodb.zip>Upload
+**Step 6.Amazon S3>Buckets>nodejs-curd-app-with-dynamodb-amit>Click on Upload>Add files**
 
-crud-app is on CodeCommit repository
+- Choose Nodejs-curd-app-with-dynamodb.zip>Open>Upload
+- Nodejs-curd-app-with-dynamodb.zip is uploaded to S3
 
 # End of Lab
 
@@ -137,8 +144,10 @@ crud-app is on CodeCommit repository
 # 3.crud-app-on-single-ec2-lab
 
 **Step 1.Launch an Instance with following settings:**
+
+Keep all the things default besides the following:
 - IAM role - Ec2S3FullAccess
-- Security Group - 80,22,3000 Open Port 
+- Security Group - 80,22,3000 Port open 
 
 **Step 2.Connect the Instance and type following commands**
 ```sh
@@ -154,7 +163,7 @@ $ ls -a
 $ npm install
 $ npm start
 ```
-**Step 3.Copy Public ip of instance and paste it in browser**
+**Step 3.Copy Public ip of the instance and paste it in browser**
 - e.g 13.122.218.51:3000
 
 **Step 4.Goto Postman Tool and replace localhost:3000 with following**
@@ -202,6 +211,7 @@ $ npm start
 **Step 1. Goto AWS Management Console>Services>Ec2>Ec2Dashboard>Auto Scaling>Launch Configurations**
 
 **Step 2. Click on Create Launch configuration**
+Provide the following details:
 - Give name - lc-cd-crud
 - AMI - Copy AMI-Id from launch Instance 
 - Instance type- choose t2.micro
