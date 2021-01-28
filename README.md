@@ -29,27 +29,32 @@
 
 **Step 6.Goto Postman Tool and put the following value**
 - http://{{url}}/readData
+- Click on Send
 
 **Step 7.Goto Postman Tool and put the following value**
 - http://{{url}}/insertData
+- Click on Send
 
 **Step 8.Now Goto AWS Console>DynamoDB>Tables>Items>info**
 - New Item added successfully
 
 **Step 9.Goto Postman Tool and put the following value**
 - http://{{url}}/updateData
+- Click on Send
 
 **Step 10.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
 - Check for the data updated
 
 **Step 11.Goto Postman Tool and put the following value**
 - http://{{url}}/deleteData
+- Click on Send
 
 **Step 12.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
 - Check for the data deleted
 
 **Step 13.Goto Postman Tool and put the following value**
 - http://{{url}}/deleteTable
+- Click on Send
 
 **Step 14.Now Goto AWS Console>DynamoDB>Tables**
 - Refresh and see Table is deleted.
@@ -69,11 +74,13 @@ $ ./node_modules/.bin/env-cmd -f ./.env.dev node app.js
 **Step 17.Goto Postman Tool and change environment to dev**
 - Put the following value
   - http://{{url}}/updateData
+  - Click on Send
 
 Click on Send
 
 **Step 18.Goto Postman Tool and put the following value**
 - http://{{url}}/deleteData
+- Click on Send
 
 **Step 19.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
 - Check for the data deleted
@@ -81,6 +88,7 @@ Click on Send
 **Step 20.Goto Postman Tool and change environment to ec2**
 - Put the following value
   - http://{{url}}/deleteTable
+  - Click on Send
 
 **Step 21.Now Goto AWS Console>DynamoDB>Tables**
 - Refresh and see Table is deleted.
@@ -184,24 +192,28 @@ $ npm start
 
 **Step 8.Goto Postman Tool and put the following value**
 - http://Public-Ip:3000/readData
+- Click on Send
 
 **Step 9.Goto Postman Tool and put the following value**
 - http://Public-Ip:3000/insertData
+- Click on Send
 
 **Step 10.Now Goto AWS Console>DynamoDB>Tables>Items>info**
 - Check for the data inserted
 
 **Step 11.Goto Postman Tool and put the following value**
 - http://Public-Ip:3000/updateData
+- Click on Send
 
 **Step 12.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
 - Check for the data updated
 
 **Step 13.Goto Postman Tool and put the following value**
 - http://Public-Ip:3000/deleteTable
+- Click on Send
 
 **Step 14.Now Goto AWS Console>DynamoDB>Tables**
-- Refresh and seee Table is deleted.
+- Refresh and see Table is deleted.
 
 # End of Lab
 
@@ -211,13 +223,14 @@ $ npm start
 **Step 1. Goto AWS Management Console>Services>Ec2>Ec2Dashboard>Auto Scaling>Launch Configurations**
 
 **Step 2. Click on Create Launch configuration**
+
 Provide the following details:
 - Give name - lc-cd-crud
 - AMI - Copy AMI-Id from launch Instance 
 - Instance type- choose t2.micro
 - IAM Instance profile - EC2S3FullAccess
 
-**Step 3. Click on Advance details>user data>As text**
+**Step 3. Click on Advanced details>user data>As text**
 - Type the following commands-
 ```sh
 #!/bin/bash
@@ -292,13 +305,14 @@ Click on Create
 Click on Update
 
 **Step 15.Ec2>Auto Scaling Group>asg-cd>Instances**
-- See the lifecycle behaviour pending>pending-wait>pending-wait:proceed>INservice
+- See the lifecycle behaviour Pending>Pending-wait>Pending-Wait:Proceed>InService
 
 **Step 16.Click Instance and copy & paste the Public IP address in browser to see it running**
 - e.g.- 13.222.125.52:3000
 
 **Step 17.Open Postman Tool>Environment>Ec2**
 - In Ec2 change current value of ec2 url - 13.222.125.52:3000
+- Click on Update
 
 **Step 18.Now select {{url}}/create table and Click on Send**
 
@@ -308,27 +322,32 @@ Click on Update
 
 **Step 20.Goto Postman Tool and put the following value**
 - http://{{url}}/readData
+- Click on Send
 
 **Step 21.Goto Postman Tool and put the following value**
 - http://{{url}}/insertData
+- Click on Send
 
 **Step 22.Now Goto AWS Console>DynamoDB>Tables>Items>info**
 - Check for the data inserted
 
 **Step 23.Goto Postman Tool and put the following value**
 - http://{{url}}/updateData
+- Click on Send
 
 **Step 24.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
 - Check for the data updated
 
 **Step 25.Goto Postman Tool and put the following value**
 - http://{{url}}/deleteData
+- Click on Send
 
 **Step 26.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
 - Check for the data deleted
 
 **Step 27.Goto Postman Tool and put the following value**
 - http://{{url}}/deleteTable
+- Click on Send
 
 **Step 28.Now Goto AWS Console>DynamoDB>Tables**
 - Refresh and see Table is deleted.
@@ -346,7 +365,7 @@ Click on Update
 
 - Health checks
   - Select ELB
-  - Health check grace period - 60 seconds
+  - Health check grace period - 120 seconds
 
 Click on Update
 
@@ -400,6 +419,7 @@ Click Next:Register targets
 
 **Step 10.Goto Ec2Dashboard>Load balancers>alb-crud**
 - It is in provisioning state
+
 **Step 8.Goto Ec2Dashboard>Auto Scaling>Auto scaling groups>test-asg**
 - Load balancing>load balancers
   - Select Application Load Balancer
@@ -434,27 +454,32 @@ Click on Update
 
 **Step 17.Goto Postman Tool and put the following value**
 - http://{{url}}/readData
+- Click on Send
 
 **Step 18.Goto Postman Tool and put the following value**
 - http://{{url}}/insertData
+- Click on Send
 
 **Step 19.Now Goto AWS Console>DynamoDB>Tables>Items>info**
 - New Item added successfully
 
 **Step 20.Goto Postman Tool and put the following value**
 - http://{{url}}/updateData
+- Click on Send
 
 **Step 21.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
 - Check for the data updated
 
 **Step 22.Goto Postman Tool and put the following value**
 - http://{{url}}/deleteData
+- Click on Send
 
 **Step 23.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
 - Check for the data deleted
 
 **Step 24.Goto Postman Tool and put the following value**
 - http://{{url}}/deleteTable
+- Click on Send
 
 **Step 25.Now Goto AWS Console>DynamoDB>Tables**
 - Refresh and see Table is deleted.
