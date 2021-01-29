@@ -577,7 +577,8 @@ Click on create app
 - See Application is running
 
 **Step 6.Goto Ec2Dashboard>crud-env>Connect>connect**
-Now Type the following commands -
+
+Run the following commands -
 ```sh
 $ cd /var/app/current
 $ ls -a
