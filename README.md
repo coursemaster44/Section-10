@@ -490,9 +490,54 @@ Click on Update
 
 # End of Lab
 
+# 7.ebs-deployment-1-lab-1
+**Step 1.AWS Console>Services>Elastic Beanstalk>Create Application**
+- Create a web app
+  - Application Name- crud-app
+  - Platform 
+    - Platform 
+      - Node.js
+   - Platform branch
+      - Node.js 12 running on 64bit Amazon Llinux2
+   - Platform version
+      - 5.2.3(Recommended)
+   - Application Code - Local file>Choose file
+
+- Click on Configure more options
+  - In Presets select High availability
+  - Click on Save
+
+Click on Create App
+
+**Step 2. Creating environment started**
+- Elastic BeanStalk launches an environment named CrudApp-env
+- Click on CrudApp-env to check the environment
+
+**Step 3. Goto Ec2Dashboard>CrudApp-env Instance>Actions>Connect>Connect**
+Run the following commands:
+```sh
+$ cd /var/app/current
+$ ls -a
+$ cat Procfile
+$ cd /var/log
+$ ls
+$ cat eb-engine.log
+```
+**Step 4.Goto Ec2Dashboard>CrudApp-env>Security>sg-xxxxxx>Edit Inbound rules**
+
+- Port 80 and 22 are already open
+- Click on Add rule for port 3000 from anywhere 
+
+**Step 5. Paste CrudApp-env'sPublic Ip:3000 in browser**
+- See that App is running
+
+**Step 6. Goto Ec2>Target groups>awseb-xxx>Group details**
+- Port open for 80
+
+# End of lab
 
 
-# 7.ebs-deployment-1-lab-2
+# 8.ebs-deployment-1-lab-2
 
 **Step 1.Open Visual Studio Code**
 - Open .env.prod and edit as following
