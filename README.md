@@ -1,6 +1,127 @@
 # Section-10
 
-# 1-postman-environment-config-lab
+# Push CRUD App on CodeCommit & S3 - Lab
+
+**Step 1.Goto Visual Studio code**
+- Run the following commands
+```sh
+$ cd crud-app/
+$ git init
+$ touch .gitignore 
+# .gitignore files are - .env.dev,node_modules/,.DS_Store
+```
+**Step 2.Goto AWS Console>Developer Tools>CodeCommit>Repositories>Create Repository**
+In repsitory settings-
+- Repository name - crud-app
+
+Click on Create
+
+**Step 3.Goto AWS Console>CodeCommit>Repositories>crud-app**
+- Click to copy on Clone URL>Clone HTTPS
+
+**Step 4.Go back to Step 1 and type following commands**
+```sh
+$ git remote add origin https://git-commit.ap.south-1.amazonaws.com/v1/repos/crud-app**
+$ cat .git/config 
+# see entry in config file
+$ git status
+$ git add .gitignore
+$ git commit -m "first commit"
+$ git push -u origin master
+# To Verify above goto AWS Console>CodeCommit>Repositories>crud-app>See the entry for .gitiginore
+$ git add .
+$ git status
+$ git commit -m "pushing all other files and folders"
+$ git push
+$ rm -rf node_modules/
+$ rm -f package-lock.json
+$zip -r Nodejs-curd-app-with-dynamodb.zip . -x "_MACOSX" -x ".DS_Store" -x ".env.dev"
+```
+
+**Step 5.Goto AWS Console>S3>Buckets>Create Bucket**
+- Bucket name - nodejs-curd-app-with-dynamodb-amit
+- Region - Asia Pacific(Mumbai)ap-south-1
+- Keep all other settings default 
+
+Click on Create Bucket
+
+**Step 6.Amazon S3>Buckets>nodejs-curd-app-with-dynamodb-amit>Click on Upload>Add files**
+
+- Choose Nodejs-curd-app-with-dynamodb.zip>Open>Upload
+- Nodejs-curd-app-with-dynamodb.zip is uploaded to S3
+
+# End of Lab
+
+# Deploy CRUD App on Single EC2 - Lab
+
+**Step 1.Launch an Instance with following settings:**
+
+Keep all the things default besides the following:
+- IAM role - Ec2S3FullAccess
+- Security Group - 80,22,3000 Port open 
+
+**Step 2.Connect the Instance and type following commands**
+```sh
+$ sudo su 
+$ yum update -y
+$ curl -sL https://rpm.nodesource.com/setup_lts.x | bash - 
+$ yum install nodejs -y
+$ npm install -g pm2
+$ pm2 update
+$ aws s3 cp s3://nodejs-curd-app-with-dynamodb-amit/Nodejs-curd-app-with-.zip .
+$ unzip Nodejs-curd-app-with-dynamodb.zip
+$ ls -a
+$ npm install
+$ npm start
+```
+**Step 3.Copy Public ip of the instance and paste it in browser**
+- e.g 13.122.218.51:3000
+
+**Step 4.Goto Postman Tool and replace localhost:3000 with following**
+- http://Public-Ip:3000/createTable
+- Click on Send
+  - Error:need dynamoDB access
+
+**Step 5. Goto IAM>Roles>Ec2S3FullAccess>Attach Policy**
+- Select AmazonDynamoDBFullAccess policy
+- Click to attach policy
+
+**Step 6.Go back to Step 4 and click on Send**
+- Now Successful
+
+**Step 7.Check the Table created in DynamoDB**
+- Goto AWS Console>DynamoDB>Tables
+  - Table is created
+
+**Step 8.Goto Postman Tool and put the following value**
+- http://Public-Ip:3000/readData
+- Click on Send
+
+**Step 9.Goto Postman Tool and put the following value**
+- http://Public-Ip:3000/insertData
+- Click on Send
+
+**Step 10.Now Goto AWS Console>DynamoDB>Tables>Items>info**
+- Check for the data inserted
+
+**Step 11.Goto Postman Tool and put the following value**
+- http://Public-Ip:3000/updateData
+- Click on Send
+
+**Step 12.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
+- Check for the data updated
+
+**Step 13.Goto Postman Tool and put the following value**
+- http://Public-Ip:3000/deleteTable
+- Click on Send
+
+**Step 14.Now Goto AWS Console>DynamoDB>Tables**
+- Refresh and see Table is deleted.
+
+# End of Lab
+
+
+# Manage Postman Environments - Lab
 
 **Step 1.Open Postman Tool**
 - Click on Top Right corner Manage Environments>Add
@@ -95,130 +216,8 @@ Click on Send
 
 # End of lab
 
-# 2-push-crud-app-on-s3-codecommit-lab
 
-**Step 1.Goto Visual Studio code**
-- Run the following commands
-```sh
-$ cd crud-app/
-$ git init
-$ touch .gitignore 
-# .gitignore files are - .env.dev,node_modules/,.DS_Store
-```
-**Step 2.Goto AWS Console>Developer Tools>CodeCommit>Repositories>Create Repository**
-In repsitory settings-
-- Repository name - crud-app
-
-Click on Create
-
-**Step 3.Goto AWS Console>CodeCommit>Repositories>crud-app**
-- Click to copy on Clone URL>Clone HTTPS
-
-**Step 4.Go back to Step 1 and type following commands**
-```sh
-$ git remote add origin https://git-commit.ap.south-1.amazonaws.com/v1/repos/crud-app**
-$ cat .git/config 
-# see entry in config file
-$ git status
-$ git add .gitignore
-$ git commit -m "first commit"
-$ git push -u origin master
-# To Verify above goto AWS Console>CodeCommit>Repositories>crud-app>See the entry for .gitiginore
-$ git add .
-$ git status
-$ git commit -m "pushing all other files and folders"
-$ git push
-$ rm -rf node_modules/
-$ rm -f package-lock.json
-$zip -r Nodejs-curd-app-with-dynamodb.zip . -x "_MACOSX" -x ".DS_Store" -x ".env.dev"
-```
-
-**Step 5.Goto AWS Console>S3>Buckets>Create Bucket**
-- Bucket name - nodejs-curd-app-with-dynamodb-amit
-- Region - Asia Pacific(Mumbai)ap-south-1
-- Keep all other settings default 
-
-Click on Create Bucket
-
-**Step 6.Amazon S3>Buckets>nodejs-curd-app-with-dynamodb-amit>Click on Upload>Add files**
-
-- Choose Nodejs-curd-app-with-dynamodb.zip>Open>Upload
-- Nodejs-curd-app-with-dynamodb.zip is uploaded to S3
-
-# End of Lab
-
-
-
-# 3.crud-app-on-single-ec2-lab
-
-**Step 1.Launch an Instance with following settings:**
-
-Keep all the things default besides the following:
-- IAM role - Ec2S3FullAccess
-- Security Group - 80,22,3000 Port open 
-
-**Step 2.Connect the Instance and type following commands**
-```sh
-$ sudo su 
-$ yum update -y
-$ curl -sL https://rpm.nodesource.com/setup_lts.x | bash - 
-$ yum install nodejs -y
-$ npm install -g pm2
-$ pm2 update
-$ aws s3 cp s3://nodejs-curd-app-with-dynamodb-amit/Nodejs-curd-app-with-.zip .
-$ unzip Nodejs-curd-app-with-dynamodb.zip
-$ ls -a
-$ npm install
-$ npm start
-```
-**Step 3.Copy Public ip of the instance and paste it in browser**
-- e.g 13.122.218.51:3000
-
-**Step 4.Goto Postman Tool and replace localhost:3000 with following**
-- http://Public-Ip:3000/createTable
-- Click on Send
-  - Error:need dynamoDB access
-
-**Step 5. Goto IAM>Roles>Ec2S3FullAccess>Attach Policy**
-- Select AmazonDynamoDBFullAccess policy
-- Click to attach policy
-
-**Step 6.Go back to Step 4 and click on Send**
-- Now Successful
-
-**Step 7.Check the Table created in DynamoDB**
-- Goto AWS Console>DynamoDB>Tables
-  - Table is created
-
-**Step 8.Goto Postman Tool and put the following value**
-- http://Public-Ip:3000/readData
-- Click on Send
-
-**Step 9.Goto Postman Tool and put the following value**
-- http://Public-Ip:3000/insertData
-- Click on Send
-
-**Step 10.Now Goto AWS Console>DynamoDB>Tables>Items>info**
-- Check for the data inserted
-
-**Step 11.Goto Postman Tool and put the following value**
-- http://Public-Ip:3000/updateData
-- Click on Send
-
-**Step 12.Now Goto AWS Console>DynamoDB>Tables>Items>info>actors**
-- Check for the data updated
-
-**Step 13.Goto Postman Tool and put the following value**
-- http://Public-Ip:3000/deleteTable
-- Click on Send
-
-**Step 14.Now Goto AWS Console>DynamoDB>Tables**
-- Refresh and see Table is deleted.
-
-# End of Lab
-
-
-# 4.crud-app-on-asg-lab
+# Deploy CRUD App on EC2 Fleet with Auto Scaling- Lab
 
 **Step 1. Goto AWS Management Console>Services>Ec2>Ec2Dashboard>Auto Scaling>Launch Configurations**
 
@@ -356,7 +355,8 @@ Click on Update
 
 
 
-# 5.crud-asg-alb-lab
+# Deploy CRUD App on EC2 Fleet with ALB : Part 1 - Lab
+
 **Step 1.Goto Ec2>Auto Scaling groups>test-asg>Edit**
 - Edit test-asg - 
 - Desired - 3
@@ -490,7 +490,8 @@ Click on Update
 
 # End of Lab
 
-# 7.ebs-deployment-1-lab-1
+# Deploy CRUD App on Elastic Beanstalk : Part 1 - Lab
+
 **Step 1.AWS Console>Services>Elastic Beanstalk>Create Application**
 - Create a web app
   - Application Name- crud-app
@@ -537,7 +538,7 @@ $ cat eb-engine.log
 # End of lab
 
 
-# 8.ebs-deployment-1-lab-2
+# Deploy CRUD App on Elastic Beanstalk : Part 2 - Lab
 
 **Step 1.Open Visual Studio Code**
 - Open .env.prod and edit as following
