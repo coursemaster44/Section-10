@@ -646,6 +646,27 @@ $ ls
 
 # End of Lab
 
+# Section Clean-up - Lab
+
+**Step 1. Goto AWS Management Console>EC2 Dashboard>Auto Scaling Groups>test-asg>delete>confirm delete**
+
+**Step 2. AWS Management Console>Services>ElasticBeanStalk>Applications>crud-app-1>Actions>Delete Application**
+- Enter the name in Confirm Application Deletion
+- Click on Delete
+
+**Step 3. AWS Management Console>EC2 Dashboard>Load Balancing>load Balancers>alb-crud>Actions>Delete**
+- Click on Yes,Delete
+
+**Step 4. AWS Management Console>EC2 Dashboard>Load Balancing>Target groups>tg-crud>Actions>Delete**
+- Click on Yes,Delete 
+
+# End of lab
+
+
+
+
+
+
 
 
 
